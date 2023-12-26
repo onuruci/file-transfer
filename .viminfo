@@ -12,7 +12,11 @@
 ~h
 # Command Line History (newest to oldest):
 :wq
+<<<<<<< Updated upstream
 |2,0,1703586342,,"wq"
+=======
+|2,0,1703586355,,"wq"
+>>>>>>> Stashed changes
 
 # Search String History (newest to oldest):
 
@@ -25,8 +29,13 @@
 # Registers:
 
 # File marks:
+<<<<<<< Updated upstream
 '0  1  0  ~/code/server.py
 |4,48,1,0,1703586342,"~/code/server.py"
+=======
+'0  1  0  ~/code/client.py
+|4,48,1,0,1703586355,"~/code/client.py"
+>>>>>>> Stashed changes
 '1  3  0  ~/a.txt
 |4,49,3,0,1703505692,"~/a.txt"
 '2  2  0  ~/a.txt
@@ -43,8 +52,13 @@
 |4,55,1,0,1703505425,"~/a.txt"
 
 # Jumplist (newest first):
+<<<<<<< Updated upstream
 -'  1  0  ~/code/server.py
 |4,39,1,0,1703586342,"~/code/server.py"
+=======
+-'  1  0  ~/code/client.py
+|4,39,1,0,1703586355,"~/code/client.py"
+>>>>>>> Stashed changes
 -'  3  0  ~/a.txt
 |4,39,3,0,1703505692,"~/a.txt"
 -'  3  0  ~/a.txt
@@ -72,8 +86,13 @@
 
 # History of marks within files (newest to oldest):
 
+<<<<<<< Updated upstream
 > ~/code/server.py
 	*	1703586341	0
+=======
+> ~/code/client.py
+	*	1703586355	0
+>>>>>>> Stashed changes
 	"	1	0
 	^	1	0
 
