@@ -12,7 +12,11 @@
 ~h
 # Command Line History (newest to oldest):
 :wq
-|2,0,1703670744,,"wq"
+|2,0,1703673664,,"wq"
+:q
+|2,0,1703672454,,"q"
+:Wq
+|2,0,1703672266,,"Wq"
 :w
 |2,0,1703670637,,"w"
 
@@ -26,234 +30,335 @@
 
 # Registers:
 ""-	CHAR	0
-	=
-|3,1,36,0,1,0,1703670576,"="
+	0
+|3,1,36,0,1,0,1703673550,"0"
 
 # File marks:
-'0  2  12  ~/.gitignore
-|4,48,2,12,1703670744,"~/.gitignore"
-'1  1  0  ~/code/udp/client.py
-|4,49,1,0,1703670672,"~/code/udp/client.py"
-'2  1  0  ~/code/udp/server.py
-|4,50,1,0,1703670666,"~/code/udp/server.py"
-'3  92  0  ~/.viminfo
-|4,51,92,0,1703670640,"~/.viminfo"
-'4  92  0  ~/.viminfo
-|4,52,92,0,1703670631,"~/.viminfo"
-'5  1  0  ~/code/client.py
-|4,53,1,0,1703586355,"~/code/client.py"
-'6  3  0  ~/a.txt
-|4,54,3,0,1703505692,"~/a.txt"
-'7  2  0  ~/a.txt
-|4,55,2,0,1703505599,"~/a.txt"
-'8  2  0  ~/a.txt
-|4,56,2,0,1703505599,"~/a.txt"
-'9  1  0  ~/a.txt
-|4,57,1,0,1703505425,"~/a.txt"
+'0  38  18  ~/code/tcp/server.py
+|4,48,38,18,1703673664,"~/code/tcp/server.py"
+'1  31  28  ~/code/tcp/server.py
+|4,49,31,28,1703673545,"~/code/tcp/server.py"
+'2  31  28  ~/code/tcp/server.py
+|4,50,31,28,1703673545,"~/code/tcp/server.py"
+'3  32  28  ~/code/tcp/server.py
+|4,51,32,28,1703673449,"~/code/tcp/server.py"
+'4  32  28  ~/code/tcp/server.py
+|4,52,32,28,1703673449,"~/code/tcp/server.py"
+'5  32  28  ~/code/tcp/server.py
+|4,53,32,28,1703673449,"~/code/tcp/server.py"
+'6  32  28  ~/code/tcp/server.py
+|4,54,32,28,1703673449,"~/code/tcp/server.py"
+'7  31  29  ~/code/tcp/server.py
+|4,55,31,29,1703673412,"~/code/tcp/server.py"
+'8  31  29  ~/code/tcp/server.py
+|4,56,31,29,1703673412,"~/code/tcp/server.py"
+'9  31  29  ~/code/tcp/server.py
+|4,57,31,29,1703673412,"~/code/tcp/server.py"
 
 # Jumplist (newest first):
--'  2  12  ~/.gitignore
-|4,39,2,12,1703670744,"~/.gitignore"
--'  1  0  ~/.gitignore
-|4,39,1,0,1703670725,"~/.gitignore"
--'  1  0  ~/code/udp/client.py
-|4,39,1,0,1703670672,"~/code/udp/client.py"
--'  1  0  ~/code/udp/client.py
-|4,39,1,0,1703670672,"~/code/udp/client.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1703670666,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1703670666,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1703670666,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1703670666,"~/code/udp/server.py"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670640,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  92  0  ~/.viminfo
-|4,39,92,0,1703670631,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/.viminfo
-|4,39,1,0,1703670559,"~/.viminfo"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  1  0  ~/code/client.py
-|4,39,1,0,1703586355,"~/code/client.py"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  3  0  ~/a.txt
-|4,39,3,0,1703505692,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
--'  2  0  ~/a.txt
-|4,39,2,0,1703505689,"~/a.txt"
+-'  38  18  ~/code/tcp/server.py
+|4,39,38,18,1703673664,"~/code/tcp/server.py"
+-'  31  28  ~/code/tcp/server.py
+|4,39,31,28,1703673547,"~/code/tcp/server.py"
+-'  31  28  ~/code/tcp/server.py
+|4,39,31,28,1703673545,"~/code/tcp/server.py"
+-'  32  28  ~/code/tcp/server.py
+|4,39,32,28,1703673517,"~/code/tcp/server.py"
+-'  32  28  ~/code/tcp/server.py
+|4,39,32,28,1703673517,"~/code/tcp/server.py"
+-'  32  28  ~/code/tcp/server.py
+|4,39,32,28,1703673449,"~/code/tcp/server.py"
+-'  31  29  ~/code/tcp/server.py
+|4,39,31,29,1703673419,"~/code/tcp/server.py"
+-'  31  29  ~/code/tcp/server.py
+|4,39,31,29,1703673412,"~/code/tcp/server.py"
+-'  31  25  ~/code/tcp/server.py
+|4,39,31,25,1703673405,"~/code/tcp/server.py"
+-'  31  25  ~/code/tcp/server.py
+|4,39,31,25,1703673401,"~/code/tcp/server.py"
+-'  31  26  ~/code/tcp/server.py
+|4,39,31,26,1703673392,"~/code/tcp/server.py"
+-'  31  23  ~/code/tcp/server.py
+|4,39,31,23,1703673337,"~/code/tcp/server.py"
+-'  42  4  ~/code/tcp/server.py
+|4,39,42,4,1703673330,"~/code/tcp/server.py"
+-'  43  4  ~/code/tcp/server.py
+|4,39,43,4,1703673330,"~/code/tcp/server.py"
+-'  41  4  ~/code/tcp/server.py
+|4,39,41,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  37  4  ~/code/tcp/server.py
+|4,39,37,4,1703673330,"~/code/tcp/server.py"
+-'  35  4  ~/code/tcp/server.py
+|4,39,35,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  37  4  ~/code/tcp/server.py
+|4,39,37,4,1703673330,"~/code/tcp/server.py"
+-'  35  4  ~/code/tcp/server.py
+|4,39,35,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  35  4  ~/code/tcp/server.py
+|4,39,35,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  35  4  ~/code/tcp/server.py
+|4,39,35,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  35  4  ~/code/tcp/server.py
+|4,39,35,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673330,"~/code/tcp/server.py"
+-'  36  4  ~/code/tcp/server.py
+|4,39,36,4,1703673327,"~/code/tcp/server.py"
+-'  36  14  ~/code/tcp/server.py
+|4,39,36,14,1703673314,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673246,"~/code/tcp/server.py"
+-'  19  27  ~/code/tcp/server.py
+|4,39,19,27,1703673003,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  24  33  ~/code/tcp/server.py
+|4,39,24,33,1703672991,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  33  ~/code/tcp/server.py
+|4,39,23,33,1703672984,"~/code/tcp/server.py"
+-'  23  37  ~/code/tcp/server.py
+|4,39,23,37,1703672899,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672887,"~/code/tcp/server.py"
+-'  16  43  ~/code/tcp/server.py
+|4,39,16,43,1703672867,"~/code/tcp/server.py"
+-'  16  27  ~/code/tcp/server.py
+|4,39,16,27,1703672819,"~/code/tcp/server.py"
+-'  23  7  ~/code/tcp/server.py
+|4,39,23,7,1703672606,"~/code/tcp/server.py"
+-'  23  7  ~/code/tcp/server.py
+|4,39,23,7,1703672606,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  20  7  ~/code/tcp/server.py
+|4,39,20,7,1703672600,"~/code/tcp/server.py"
+-'  19  7  ~/code/tcp/server.py
+|4,39,19,7,1703672600,"~/code/tcp/server.py"
+-'  19  7  ~/code/tcp/server.py
+|4,39,19,7,1703672600,"~/code/tcp/server.py"
+-'  19  7  ~/code/tcp/server.py
+|4,39,19,7,1703672600,"~/code/tcp/server.py"
+-'  19  7  ~/code/tcp/server.py
+|4,39,19,7,1703672600,"~/code/tcp/server.py"
+-'  40  10  ~/code/tcp/server.py
+|4,39,40,10,1703672564,"~/code/tcp/server.py"
+-'  22  10  ~/code/tcp/server.py
+|4,39,22,10,1703672564,"~/code/tcp/server.py"
+-'  25  10  ~/code/tcp/server.py
+|4,39,25,10,1703672564,"~/code/tcp/server.py"
+-'  21  10  ~/code/tcp/server.py
+|4,39,21,10,1703672564,"~/code/tcp/server.py"
 
 # History of marks within files (newest to oldest):
+
+> ~/code/tcp/server.py
+	*	1703673664	0
+	"	38	18
+	^	38	19
+	.	38	18
+	+	1	464
+	+	1	0
+	+	1	13
+	+	1	22
+	+	1	159
+	+	1	107
+	+	1	426
+	+	1	446
+	+	43	0
+	+	44	0
+	+	1	427
+	+	1	113
+	+	1	50
+	+	1	121
+	+	1	157
+	+	1	175
+	+	1	206
+	+	1	228
+	+	1	269
+	+	1	296
+	+	1	334
+	+	1	366
+	+	1	387
+	+	1	130
+	+	1	114
+	+	24	30
+	+	8	16
+	+	9	3
+	+	10	7
+	+	11	7
+	+	13	7
+	+	14	7
+	+	15	11
+	+	20	11
+	+	21	15
+	+	22	15
+	+	23	19
+	+	24	15
+	+	40	22
+	+	41	15
+	+	40	10
+	+	9	57
+	+	10	4
+	+	11	4
+	+	13	4
+	+	14	4
+	+	15	8
+	+	20	8
+	+	21	12
+	+	22	12
+	+	23	12
+	+	24	8
+	+	13	0
+	+	16	35
+	+	20	11
+	+	21	15
+	+	22	15
+	+	23	19
+	+	24	15
+	+	17	35
+	+	18	26
+	+	16	44
+	+	24	37
+	+	18	48
+	+	24	33
+	+	19	27
+	+	41	5
+	+	26	0
+	+	31	183
+	+	29	8
+	+	30	8
+	+	31	27
+	+	31	25
+	+	42	14
+	+	41	4
+	+	31	25
+	+	31	27
+	+	39	0
+	+	31	29
+	+	41	4
+	+	42	4
+	+	41	4
+	+	32	30
+	+	32	43
+	+	39	0
+	+	31	28
+	+	36	34
+	+	37	39
+	+	38	18
+
+> ~/examples/tcp/tcpserver.py
+	*	1703672453	0
+	"	1	0
+	.	1	0
+	+	1	0
 
 > ~/.gitignore
 	*	1703670743	0
