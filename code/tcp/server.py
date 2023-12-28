@@ -1,16 +1,44 @@
 # echo-server.py
 
 import socket
+import os
+
+from utils import ACK, NACK
 
 HOST = ""  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
+DIR_NAME = "../../objects/"
+
+
+#################
 
 def read_file_bytes(filename):
-    with open("../../objects/" + filename) as file:
+    with open(DIR_NAME + filename) as file:
         file_data = file.read()
         bytes_data = file_data.encode('utf-8')
         return bytes_data
+
+#################
+
+def read_file(filename):
+    with open(DIR_NAME + filename) as file:
+        file_data = file.read()
+
+        return file_data
+
+#################
+
+def message_status(connection):
+    status_data = connection.recv(1024).decode()
+
+    if(status_data == ACK):
+        return True
+
+    return False
+
+
+#################
 
 def run_server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,23 +47,27 @@ def run_server():
 
     conn, addr = s.accept()
     with conn:
-        print(f"Connected by {addr}")
-        filename = "small-0.obj"
+        print(f"\nConnected by {addr}\n")
+        
 
-        md5_bytes_data = read_file_bytes(filename + ".md5")
-        filename_data = filename.encode('utf-8')
+        while True:
+            filename = "small-0.obj"
 
-        #conn.send(filename_data)
-        #conn.send(md5_bytes_data)
+            md5_data = read_file(filename + ".md5")
 
-        print(f"Checksum sent for file {filename}")
+            file_size = os.path.getsize(DIR_NAME + filename)
 
-        obj_bytes_data = read_file_bytes("small-0.obj")
+            metadata = f"{filename}|{file_size}|{md5_data}"
+            conn.sendall(metadata.encode('utf-8'))
 
-        length_data = str(len(obj_bytes_data)).encode('utf-8')
+            print(f"Metadata sent for file {filename}")
 
-        #conn.send(length_data)
 
+            if(message_status(conn)):
+                print("ACK received")
+                break;
+
+#################
 
 def test_file():
     bytes_data = read_file_bytes("small-0.obj.md5")
@@ -52,6 +84,8 @@ def test_file():
         while(c<=len(bytes_data)):
             #print(bytes_data[c:c+1024])
             c+=1024
+
+#################
 
 if __name__ == "__main__":
     run_server()

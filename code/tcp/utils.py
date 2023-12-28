@@ -1,0 +1,2 @@
+ACK = "ACK"
+NACK = "NACK"
