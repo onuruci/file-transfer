@@ -37,6 +37,15 @@ def message_status(connection):
 
     return False
 
+#################
+
+def read_file_and_send(connection, filename):
+    with open(DIR_NAME + filename, 'rb') as file:
+        file_data = file.read(1024)
+        while(file_data):
+            connection.sendall(file_data)
+            file_data = file.read(1024)
+
 
 #################
 
@@ -49,9 +58,8 @@ def run_server():
     with conn:
         print(f"\nConnected by {addr}\n")
         
-
+        filename = "small-0.obj"
         while True:
-            filename = "small-0.obj"
 
             md5_data = read_file(filename + ".md5")
 
@@ -66,6 +74,15 @@ def run_server():
             if(message_status(conn)):
                 print("ACK received")
                 break;
+
+        while True:
+            
+            read_file_and_send(conn, filename)
+
+            if(message_status(conn)):
+                print("ACK received")
+                break;
+
 
 #################
 
