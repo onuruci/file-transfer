@@ -6,7 +6,7 @@ import os
 from utils import ACK, NACK
 
 HOST = ""  # Standard loopback interface address (localhost)
-PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+PORT = 65431  # Port to listen on (non-privileged ports are > 1023)
 
 DIR_NAME = "../../objects/"
 
@@ -57,31 +57,40 @@ def run_server():
     conn, addr = s.accept()
     with conn:
         print(f"\nConnected by {addr}\n")
+
+        for i in range(2):
         
-        filename = "small-0.obj"
-        while True:
+            filename = "small-"+str(i)+".obj"
+            while True:
 
-            md5_data = read_file(filename + ".md5")
+                md5_data = read_file(filename + ".md5")
 
-            file_size = os.path.getsize(DIR_NAME + filename)
+                file_size = os.path.getsize(DIR_NAME + filename)
 
-            metadata = f"{filename}|{file_size}|{md5_data}"
-            conn.sendall(metadata.encode('utf-8'))
+                metadata = f"{filename}|{file_size}|{md5_data}"
+                conn.sendall(metadata.encode('utf-8'))
 
-            print(f"Metadata sent for file {filename}")
+                print(len(metadata.encode('utf-8')))
+
+                print(f"Metadata sent for file {filename}")
 
 
-            if(message_status(conn)):
-                print("ACK received")
-                break;
+                if(message_status(conn)):
+                    print("ACK received")
+                    break;
 
-        while True:
+            while True:
             
-            read_file_and_send(conn, filename)
+                read_file_and_send(conn, filename)
 
-            if(message_status(conn)):
-                print("ACK received")
-                break;
+                if(message_status(conn)):
+                    print("ACK received")
+                    break;
+    conn.close()
+    s.close()
+
+
+
 
 
 #################
