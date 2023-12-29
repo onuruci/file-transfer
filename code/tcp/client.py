@@ -28,7 +28,6 @@ def get_file_and_write(s, file_size, file_name, checksum):
             recieved = s.recv(min(1024, file_size - file_read)).decode()
             file_read += len(recieved)
 
-            print(len(recieved))
             data += recieved
 
 
@@ -57,10 +56,10 @@ def run_client():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
 
-    for i in range(10):
+    for i in range(20):
 
         metadata = s.recv(1024).decode()
-
+        print("\n\n")
         print(f"Metadata received {metadata}")
 
         file_name, file_size, checksum = metadata.split('|')
@@ -69,6 +68,7 @@ def run_client():
         s.sendall(ACK.encode("utf-8"))
 
         get_file_and_write(s, file_size, file_name, checksum)
+
 
 
 
