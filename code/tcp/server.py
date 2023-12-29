@@ -13,6 +13,8 @@ DIR_NAME = "../../objects/"
 
 #################
 
+# read file and return it as bytes
+
 def read_file_bytes(filename):
     with open(DIR_NAME + filename) as file:
         file_data = file.read()
@@ -29,6 +31,10 @@ def read_file(filename):
 
 #################
 
+# waits for a message from client
+# if response is ACK return true
+# else return false
+
 def message_status(connection):
     status_data = connection.recv(1024).decode()
 
@@ -39,14 +45,12 @@ def message_status(connection):
 
 #################
 
-def read_file_and_send(connection, filename):
-    with open(DIR_NAME + filename, 'rb') as file:
-        file_data = file.read(1024)
-        while(file_data):
-            connection.sendall(file_data)
-            file_data = file.read(1024)
 
-#################
+# main function to send a file
+# generates a metadata sends it
+# wait for ACK response from client
+# sends the file
+# discard unreliable possibilities since built on tcp
 
 def send_all_file(conn, filename):
     file_size = os.path.getsize(DIR_NAME + filename)
@@ -87,6 +91,10 @@ def send_all_file(conn, filename):
 
 #################
 
+# main function
+# waits for connection
+# sends files
+
 def run_server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((HOST, PORT))
@@ -96,6 +104,7 @@ def run_server():
     with conn:
         print(f"\nConnected by {addr}\n")
 
+        # main loop for sending files
         for i in range(10):
         
             filename = "small-"+str(i)+".obj"
@@ -133,6 +142,5 @@ def test_file():
 
 if __name__ == "__main__":
     run_server()
-    #test_file()
 
 
