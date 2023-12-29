@@ -3,12 +3,13 @@
 import socket
 import hashlib
 import time
+import select
 
 from utils import ACK, NACK
 
 HOST = "172.17.0.2"  # The server's hostname or IP address
-PORT = 65431  # The port used by the server
-
+PORT = 65432  # The port used by the server
+DIR_NAME = "../../objects/"
 
 ################
 
@@ -27,6 +28,7 @@ def get_file_and_write(s, file_size, file_name, checksum):
             data += s.recv(min(1024, file_size - file_read)).decode()
             file_read += 1024
 
+        print(data)
 
         print("File read")
 
@@ -37,6 +39,10 @@ def get_file_and_write(s, file_size, file_name, checksum):
 
         if(str(md5_data) == checksum):
             print("Checksum match writing files")
+
+            with open(DIR_NAME + file_name, "w") as file:
+                file.write(data)
+
             s.sendall(ACK.encode("utf-8"))
             break;
         else:
@@ -49,7 +55,7 @@ def run_client():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
 
-    for i in range(2):
+    for i in range(5):
 
         metadata = s.recv(50).decode()
 
@@ -61,7 +67,6 @@ def run_client():
         s.sendall(ACK.encode("utf-8"))
 
         get_file_and_write(s, file_size, file_name, checksum)
-
 
 
 
