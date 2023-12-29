@@ -46,6 +46,44 @@ def read_file_and_send(connection, filename):
             connection.sendall(file_data)
             file_data = file.read(1024)
 
+#################
+
+def send_all_file(conn, filename):
+    file_size = os.path.getsize(DIR_NAME + filename)
+    
+    while True:
+        md5_data = read_file(filename + ".md5")
+
+        metadata = f"{filename}|{file_size}|{md5_data}"
+        conn.sendall(metadata.encode('utf-8'))
+
+        print("\n\n")
+        print(metadata)
+
+        print(f"Metadata sent for file {filename}")
+
+
+        if(message_status(conn)):
+            print("ACK received")
+            break;
+
+    while True:
+        print("Sending file data")
+        file_data = read_file_bytes(filename)
+        file_size = int(file_size)
+
+        data_sent = 0
+        data_end = 1024
+
+        i = 1
+
+        conn.sendall(file_data)
+
+
+        if(message_status(conn)):
+            print("ACK received")
+            break;
+
 
 #################
 
@@ -61,45 +99,11 @@ def run_server():
         for i in range(10):
         
             filename = "small-"+str(i)+".obj"
-            file_size = os.path.getsize(DIR_NAME + filename)
-
-            while True:
-
-                md5_data = read_file(filename + ".md5")
-
-                metadata = f"{filename}|{file_size}|{md5_data}"
-                conn.sendall(metadata.encode('utf-8'))
-
-                print(len(metadata.encode('utf-8')))
-
-                print(f"Metadata sent for file {filename}")
+            send_all_file(conn, filename)
+            filename = "large-"+str(i)+".obj"
+            send_all_file(conn, filename)
 
 
-                if(message_status(conn)):
-                    print("ACK received")
-                    break;
-
-            while True:
-                
-                print("Sending file data")
-                file_data = read_file_bytes(filename)
-                file_size = int(file_size)
-
-                data_sent = 0
-                data_end = 1024
-
-                i = 1
-
-                print(file_data)
-
-                conn.sendall(file_data)
-
-
-                if(message_status(conn)):
-                    print("ACK received")
-                    break;
-
-                break;
         conn.close()
         s.close()
 
