@@ -6,7 +6,7 @@ import os
 from utils import ACK, NACK
 
 HOST = ""  # Standard loopback interface address (localhost)
-PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+PORT = 65431  # Port to listen on (non-privileged ports are > 1023)
 
 DIR_NAME = "../../objects/"
 
@@ -58,7 +58,7 @@ def run_server():
     with conn:
         print(f"\nConnected by {addr}\n")
 
-        for i in range(5):
+        for i in range(10):
         
             filename = "small-"+str(i)+".obj"
             file_size = os.path.getsize(DIR_NAME + filename)
@@ -80,26 +80,26 @@ def run_server():
                     break;
 
             while True:
-            
+                
+                print("Sending file data")
                 file_data = read_file_bytes(filename)
                 file_size = int(file_size)
 
                 data_sent = 0
                 data_end = 1024
 
-                while(data_sent < file_size):
-                    conn.sendall(file_data[data_sent : data_end])
-                    data_sent += 1024
-                    data_end += 1024
+                i = 1
 
-                    if(data_end > file_size):
-                        data_end = file_size
+                print(file_data)
 
-                s.sendall(file_data)
+                conn.sendall(file_data)
+
 
                 if(message_status(conn)):
                     print("ACK received")
                     break;
+
+                break;
         conn.close()
         s.close()
 
