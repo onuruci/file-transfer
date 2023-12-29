@@ -8,7 +8,7 @@ import select
 from utils import ACK, NACK
 
 HOST = "172.17.0.2"  # The server's hostname or IP address
-PORT = 65432  # The port used by the server
+PORT = 65431  # The port used by the server
 DIR_NAME = "../../objects/"
 
 ################
@@ -25,10 +25,12 @@ def get_file_and_write(s, file_size, file_name, checksum):
         data = ""
 
         while(file_read < file_size):
-            data += s.recv(min(1024, file_size - file_read)).decode()
-            file_read += 1024
+            recieved = s.recv(min(1024, file_size - file_read)).decode()
+            file_read += len(recieved)
 
-        print(data)
+            print(len(recieved))
+            data += recieved
+
 
         print("File read")
 
@@ -55,9 +57,9 @@ def run_client():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
 
-    for i in range(5):
+    for i in range(10):
 
-        metadata = s.recv(50).decode()
+        metadata = s.recv(1024).decode()
 
         print(f"Metadata received {metadata}")
 
