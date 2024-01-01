@@ -1,5 +1,6 @@
 import socket
 import os
+import math
  
 
 localIP     = ""
@@ -11,15 +12,94 @@ bufferSize  = 1024
 DIR_NAME = "../../objects/"
 
  
+header_length = 8
+packet_data_length = 1016
 
 msgFromServer       = "Hello UDP Client"
 
 bytesToSend         = str.encode(msgFromServer)
 
 
- 
+## read file
 
-# Listen for incoming datagrams
+def read_file(filename):
+    with open(DIR_NAME + filename) as file:
+        file_data = file.read()
+
+        return file_data
+
+
+
+# send data for sure
+
+def send_data(s, data, address):
+    while(True):
+        s.sendto(data, address)
+
+        receive = s.recvfrom(bufferSize)
+
+        msg = receive[0].decode('utf-8')
+
+        if(msg == 'ACK'):
+            break
+
+
+
+# handle send file
+
+
+def send_file(filename, UDPServerSocket, address):
+    filesize = os.path.getsize(DIR_NAME + filename)
+    md5_data = read_file(filename+".md5").replace("\n", "")
+    packet_count = int(math.ceil(filesize / float(packet_data_length)))
+
+    metadata = (f"|{filename}|{filesize}|{md5_data}|{packet_count}|").encode("utf-8")
+
+    # sending metadata
+    send_data(UDPServerSocket, metadata, address)
+
+    # start sending the file itself
+    data_count = 0
+    with open(DIR_NAME + filename) as file:
+        i = 0
+        while i < packet_count:
+            window_size = 0
+            sent_arr = [""] * 1000
+            for k in range(1000):
+                file_data = file.read(1016)
+
+                if(not file_data):
+                    break
+
+                window_size += 1
+
+                file_header = str(data_count) + "|"
+
+                file_header = (8-len(file_header)) * "0" + file_header
+
+                data_to_send = str(file_header+file_data).encode('utf-8')
+                sent_arr[k] = data_to_send
+
+                UDPServerSocket.sendto(data_to_send, address)
+
+                data_count += 1
+
+            received_acks = [0] * window_size
+            i+= window_size
+            while True:
+                receive = UDPServerSocket.recvfrom(bufferSize)
+                msg = receive[0].decode('utf-8')
+                [msg_type, seq] = msg.split("|")
+
+                seq = int(seq)
+                received_acks[seq] = 1
+
+                if(received_acks.count(0) == 0):
+                    break
+
+            print(f"Passing window {i}")
+
+
 
 
 def run_server():
@@ -30,35 +110,29 @@ def run_server():
 
 
     while(True):
-
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-
-        message = bytesAddressPair[0]
 
         address = bytesAddressPair[1]
 
-        clientMsg = "Message from Client:{}".format(message)
-        clientIP  = "Client IP Address:{}".format(address)
+        clientIP  = ("Client connected with IP Address:{}".format(address))
 
-        print(clientMsg)
         print(clientIP)
+        
+        for i in range(10):
+            filename = "small-"+str(i)+".obj"
+
+            send_file(filename, UDPServerSocket, address)
+            print(f"{filename} sent successfully!")
+
+            filename = "large-"+str(i)+".obj"
+
+            send_file(filename, UDPServerSocket, address)
+            print(f"{filename} sent successfully!")
 
 
 
-        # Sending a reply to client
-        i = 0
 
-        while(i < 1000):
-            bytesToSend = str(i).encode('utf-8')
 
-            UDPServerSocket.sendto(bytesToSend, address)
-
-            receiveMsgPair = UDPServerSocket.recvfrom(bufferSize)
-
-            receiveMsg = receiveMsgPair[0].decode('utf-8')
-
-            if(receiveMsg == 'ACK'):
-                i+=1
 
 
 
