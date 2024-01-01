@@ -2,6 +2,7 @@
 
 import socket
 import os
+import time
 
 from utils import ACK, NACK
 
@@ -106,6 +107,7 @@ def run_server():
     with conn:
         print(f"\nConnected by {addr}\n")
 
+        start_time = time.time()
         # main loop for sending files
         for i in range(10):
         
@@ -113,6 +115,11 @@ def run_server():
             send_all_file(conn, filename)
             filename = "large-"+str(i)+".obj"
             send_all_file(conn, filename)
+
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+
+        print(f"Elapsed time: {elapsed_time} seconds")
 
 
         conn.close()

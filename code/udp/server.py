@@ -1,6 +1,7 @@
 import socket
 import os
 import math
+import time
  
 
 localIP     = ""
@@ -64,8 +65,8 @@ def send_file(filename, UDPServerSocket, address):
         i = 0
         while i < packet_count:
             window_size = 0
-            sent_arr = [""] * 1000
-            for k in range(1000):
+            sent_arr = [""] * 100
+            for k in range(100):
                 file_data = file.read(1016)
 
                 if(not file_data):
@@ -117,7 +118,8 @@ def run_server():
         clientIP  = ("Client connected with IP Address:{}".format(address))
 
         print(clientIP)
-        
+
+        start_time = time.time()
         for i in range(10):
             filename = "small-"+str(i)+".obj"
 
@@ -128,7 +130,9 @@ def run_server():
 
             send_file(filename, UDPServerSocket, address)
             print(f"{filename} sent successfully!")
-
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Execution time {elapsed_time}")
 
 
 
