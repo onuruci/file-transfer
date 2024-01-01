@@ -27,7 +27,7 @@ def recv_file(packet_count, UDPClientSocket):
     data = ""
     i = 0
     while i < packet_count:
-        window_size = min(packet_count - i, 1000)
+        window_size = min(packet_count - i, 100)
         received_arr = [""] * window_size
         while True:
             packet_received = UDPClientSocket.recvfrom(bufferSize)[0]
@@ -36,7 +36,7 @@ def recv_file(packet_count, UDPClientSocket):
 
             [packet_no, packet_data] = packet_decoded.split('|')
 
-            window_place = int(packet_no) % 1000
+            window_place = int(packet_no) % 100
 
             send_response(UDPClientSocket, ACK, window_place)
 
@@ -46,7 +46,7 @@ def recv_file(packet_count, UDPClientSocket):
             if(received_arr.count("") == 0):
                 break
 
-        i+=1000
+        i+=100
 
         for j in range(window_size):
             data += received_arr[j]
