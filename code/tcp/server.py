@@ -55,6 +55,7 @@ def message_status(connection):
 def send_all_file(conn, filename):
     file_size = os.path.getsize(DIR_NAME + filename)
     
+    # send metadata
     while True:
         md5_data = read_file(filename + ".md5")
 
@@ -71,6 +72,7 @@ def send_all_file(conn, filename):
             print("ACK received")
             break;
 
+    # send file
     while True:
         print("Sending file data")
         file_data = read_file_bytes(filename)
