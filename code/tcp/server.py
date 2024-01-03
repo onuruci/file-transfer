@@ -3,6 +3,7 @@
 import socket
 import os
 import time
+import sys
 
 from utils import ACK, NACK
 
@@ -10,7 +11,9 @@ HOST = ""  # Standard loopback interface address (localhost)
 PORT = 65431  # Port to listen on (non-privileged ports are > 1023)
 
 DIR_NAME = "../../objects/"
+RESULT_DIR = "./results/"
 
+result_file = ""
 
 #################
 
@@ -105,21 +108,24 @@ def run_server():
     while True:
         conn, addr = s.accept()
         with conn:
-            print(f"\nConnected by {addr}\n")
+            with open(RESULT_DIR + result_file, 'w') as file:
 
-            start_time = time.time()
-            # main loop for sending files
-            for i in range(10):
+                print(f"\nConnected by {addr}\n")
 
-                filename = "small-"+str(i)+".obj"
-                send_all_file(conn, filename)
-                filename = "large-"+str(i)+".obj"
-                send_all_file(conn, filename)
+                start_time = time.time()
+                # main loop for sending files
+                for i in range(10):
 
-            end_time = time.time()
-            elapsed_time = end_time - start_time
+                    filename = "small-"+str(i)+".obj"
+                    send_all_file(conn, filename)
+                    filename = "large-"+str(i)+".obj"
+                    send_all_file(conn, filename)
 
-            print(f"Elapsed time: {elapsed_time} seconds")
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+
+                print(f"Elapsed time: {elapsed_time} seconds")
+                file.write(str(elapsed_time))
 
 
             conn.close()
@@ -149,5 +155,9 @@ def test_file():
 #################
 
 if __name__ == "__main__":
+    if(len(sys.argv) != 2):
+        print("Missing arguement should run `python3 server.py <filename to write result>` ")
+        sys.exit()
+    result_file = sys.argv[1]
     run_server()
 
