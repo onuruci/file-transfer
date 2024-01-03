@@ -17,15 +17,21 @@ DIR_NAME = "../../objects/"
  
 header_length = 7
 packet_data_length = 1014
-default_window = 400
+default_window = 300
 window_start = 0
 window_end = 100
-timeout_limit = 0.15
+timeout_limit = 0.1
 
 file_arr = []
 
+update_sem1 = threading.Semaphore(1)
+update_sem2 = threading.Semaphore(1)
+update_sem3 = threading.Semaphore(1)
+update_sem4 = threading.Semaphore(1)
+
+update_sem_arr = [update_sem1, update_sem2, update_sem3, update_sem4]
+
 array_lock = threading.Lock()
-update_sem = threading.Semaphore(1)
 
 file_data = ""
 recv_arr = []
@@ -63,7 +69,8 @@ def send_data(s, data, address):
 # listen for acks
 
 def listen_client(socket_client):
-    update_sem.release()
+    for i in range(len(update_sem_arr)):
+        update_sem_arr[i].release()
     while True:
         try:
             receive = socket_client.recvfrom(1024)
@@ -78,7 +85,7 @@ def listen_client(socket_client):
             with array_lock:
                 file_arr[file_index].receive(seq)
                 
-                update_sem.release()
+                update_sem_arr[file_index%4].release()
                 all_completed = True
                 for i in range(len(file_arr)):
                     if(not file_arr[i].is_completed()):
@@ -95,7 +102,8 @@ def listen_client(socket_client):
                     break
             if(all_completed):
                 break
-            update_sem.release()
+            for i in range(len(update_sem_arr)):
+                update_sem_arr[i].release()
     return
 
 
@@ -109,9 +117,10 @@ def send_client(file_index):
     # if 0 send directly write sending time
     # calculate time find difference if larger than expected send again update send time
     print(f"Sending {file_index}")
-    update_sem.release()
+    sem_index = file_index % 4
+    update_sem_arr[sem_index].release()
     while True:
-        update_sem.acquire()
+        update_sem_arr[sem_index].acquire()
         if(file_arr[file_index].is_completed()):
             break
 
@@ -135,9 +144,9 @@ def send_file(start_index):
     # listener thread
     # writing thread
 
-    for i in range(10):
-        send_client(start_index + 2*i)
-        print(f"{file_arr[start_index + 2*i].name} sent successfully!")
+    for i in range(5):
+        send_client(start_index + 4*i)
+        print(f"{file_arr[start_index + 4*i].name} sent successfully!")
 
     print("Send file ended")
 
@@ -191,7 +200,7 @@ def run_server():
 
     while(True):
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-        UDPServerSocket.settimeout(0.5)
+        UDPServerSocket.settimeout(0.0005)
 
         address = bytesAddressPair[1]
 
@@ -206,15 +215,21 @@ def run_server():
         listener_thread = threading.Thread(target=listen_client, args=(UDPServerSocket,))
         sender_thread1 = threading.Thread(target=send_file, args=(0,))
         sender_thread2 = threading.Thread(target=send_file, args=(1,))
+        sender_thread3 = threading.Thread(target=send_file, args=(2,))
+        sender_thread4 = threading.Thread(target=send_file, args=(3,))
 
         listener_thread.start()
         sender_thread1.start()
         sender_thread2.start()
+        sender_thread3.start()
+        sender_thread4.start()
 
 
         listener_thread.join()
         sender_thread1.join()
         sender_thread2.join()
+        sender_thread3.join()
+        sender_thread4.join()
 
 
         end_time = time.time()
@@ -230,4 +245,6 @@ def run_server():
 
 if __name__ == "__main__":
     run_server()
+
+
 

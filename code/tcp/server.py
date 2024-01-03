@@ -46,7 +46,6 @@ def message_status(connection):
 
 #################
 
-
 # main function to send a file
 # generates a metadata sends it
 # wait for ACK response from client
@@ -55,7 +54,7 @@ def message_status(connection):
 
 def send_all_file(conn, filename):
     file_size = os.path.getsize(DIR_NAME + filename)
-    
+
     # send metadata
     while True:
         md5_data = read_file(filename + ".md5")
@@ -103,33 +102,33 @@ def run_server():
     s.bind((HOST, PORT))
     s.listen()
 
-    conn, addr = s.accept()
-    with conn:
-        print(f"\nConnected by {addr}\n")
+    while True:
+        conn, addr = s.accept()
+        with conn:
+            print(f"\nConnected by {addr}\n")
 
-        start_time = time.time()
-        # main loop for sending files
-        for i in range(10):
-        
-            filename = "small-"+str(i)+".obj"
-            send_all_file(conn, filename)
-            filename = "large-"+str(i)+".obj"
-            send_all_file(conn, filename)
+            start_time = time.time()
+            # main loop for sending files
+            for i in range(10):
 
-        end_time = time.time()
-        elapsed_time = end_time - start_time
+                filename = "small-"+str(i)+".obj"
+                send_all_file(conn, filename)
+                filename = "large-"+str(i)+".obj"
+                send_all_file(conn, filename)
 
-        print(f"Elapsed time: {elapsed_time} seconds")
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+
+            print(f"Elapsed time: {elapsed_time} seconds")
 
 
-        conn.close()
-        s.close()
-
+            conn.close()
 
 
 
 
 #################
+
 
 def test_file():
     bytes_data = read_file_bytes("small-0.obj.md5")
@@ -142,7 +141,7 @@ def test_file():
         #print(len(bytes_data))
 
         c = 0
-        
+
         while(c<=len(bytes_data)):
             #print(bytes_data[c:c+1024])
             c+=1024
@@ -151,5 +150,4 @@ def test_file():
 
 if __name__ == "__main__":
     run_server()
-
 
