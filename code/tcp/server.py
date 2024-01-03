@@ -105,11 +105,10 @@ def run_server():
     s.bind((HOST, PORT))
     s.listen()
 
-    while True:
-        conn, addr = s.accept()
-        with conn:
-            with open(RESULT_DIR + result_file, 'w') as file:
-
+    with open(RESULT_DIR + result_file, 'w') as file:
+        while True:
+            conn, addr = s.accept()
+            with conn:
                 print(f"\nConnected by {addr}\n")
 
                 start_time = time.time()
@@ -125,10 +124,11 @@ def run_server():
                 elapsed_time = end_time - start_time
 
                 print(f"Elapsed time: {elapsed_time} seconds")
-                file.write(str(elapsed_time))
+                file.write(str(elapsed_time)+"\n")
 
 
             conn.close()
+
 
 
 

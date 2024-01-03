@@ -12,9 +12,11 @@
 ~h
 # Command Line History (newest to oldest):
 :wq
-|2,0,1704298438,,"wq"
+|2,0,1704322779,,"wq"
 :q
-|2,0,1704240859,,"q"
+|2,0,1704321773,,"q"
+:qq
+|2,0,1704320299,,"qq"
 :Wq
 |2,0,1704225685,,"Wq"
 :qall
@@ -31,278 +33,374 @@
 # Debug Line History (newest to oldest):
 
 # Registers:
-"1	LINE	0
-	    print("Listener ended")
-|3,0,1,1,1,0,1704239135,"    print(\"Listener ended\")"
+""1	LINE	0
+	
+|3,1,1,1,1,0,1704320705,""
 "2	LINE	0
-	            print("Listened")
-|3,0,2,1,1,0,1704239128,"            print(\"Listened\")"
+	file_data = ""
+|3,0,2,1,1,0,1704320704,"file_data = \"\""
 "3	LINE	0
-	            print("Listenint")
-|3,0,3,1,1,0,1704239127,"            print(\"Listenint\")"
+	recv_arr = []
+|3,0,3,1,1,0,1704320703,"recv_arr = []"
 "4	LINE	0
-	            print("Timedout")
-|3,0,4,1,1,0,1704239124,"            print(\"Timedout\")"
+	
+|3,0,4,1,1,0,1704320698,""
 "5	LINE	0
-	                print(f"Sent {i}")
-|3,0,5,1,1,0,1704238626,"                print(f\"Sent {i}\")"
+	received_acks = [0] * default_window
+|3,0,5,1,1,0,1704320696,"received_acks = [0] * default_window"
 "6	LINE	0
-	        print("Running")
-|3,0,6,1,1,0,1704238609,"        print(\"Running\")"
+	    print("Send file ended")
+|3,0,6,1,1,0,1704318222,"    print(\"Send file ended\")"
 "7	LINE	0
-	            print("Listening")
-|3,0,7,1,1,0,1704238605,"            print(\"Listening\")"
+	    print(f"Sending {file_index}")
+|3,0,7,1,1,0,1704318218,"    print(f\"Sending {file_index}\")"
 "8	LINE	0
-	            print(file_index)
-|3,0,8,1,1,0,1704238600,"            print(file_index)"
+	    print(f"Sender End {window_start}")
+|3,0,8,1,1,0,1704318215,"    print(f\"Sender End {window_start}\")"
 "9	LINE	0
-	            print(seq)
-|3,0,9,1,1,0,1704238600,"            print(seq)"
-""-	CHAR	0
-	i
-|3,1,36,0,1,0,1704241251,"i"
+	            with open(RESULT_DIR + result_file, 'a+') as file:
+|3,0,9,1,1,0,1704317035,"            with open(RESULT_DIR + result_file, 'a+') as file:"
+"-	CHAR	0
+	)
+|3,0,36,0,1,0,1704320246,")"
 
 # File marks:
-'0  153  0  ~/code/udp/client.py
-|4,48,153,0,1704298438,"~/code/udp/client.py"
-'1  95  0  ~/code/udp/server_file.py
-|4,49,95,0,1704297987,"~/code/udp/server_file.py"
-'2  250  0  ~/code/udp/server.py
-|4,50,250,0,1704297754,"~/code/udp/server.py"
-'3  153  0  ~/code/tcp/server.py
-|4,51,153,0,1704297378,"~/code/tcp/server.py"
-'4  140  42  ~/code/udp/server.py
-|4,52,140,42,1704241253,"~/code/udp/server.py"
-'5  140  42  ~/code/udp/server.py
-|4,53,140,42,1704241253,"~/code/udp/server.py"
-'6  20  18  ~/code/udp/server.py
-|4,54,20,18,1704241178,"~/code/udp/server.py"
-'7  20  18  ~/code/udp/server.py
-|4,55,20,18,1704241178,"~/code/udp/server.py"
-'8  20  18  ~/code/udp/server.py
-|4,56,20,18,1704241178,"~/code/udp/server.py"
-'9  20  18  ~/code/udp/server.py
-|4,57,20,18,1704241178,"~/code/udp/server.py"
+'0  55  0  ~/code/udp/server.py
+|4,48,55,0,1704322779,"~/code/udp/server.py"
+'1  49  0  ~/code/udp/server.py
+|4,49,49,0,1704321773,"~/code/udp/server.py"
+'2  49  0  ~/code/udp/server.py
+|4,50,49,0,1704321773,"~/code/udp/server.py"
+'3  242  43  ~/code/udp/server.py
+|4,51,242,43,1704321176,"~/code/udp/server.py"
+'4  242  43  ~/code/udp/server.py
+|4,52,242,43,1704321176,"~/code/udp/server.py"
+'5  242  43  ~/code/udp/server.py
+|4,53,242,43,1704321176,"~/code/udp/server.py"
+'6  242  43  ~/code/udp/server.py
+|4,54,242,43,1704321176,"~/code/udp/server.py"
+'7  257  32  ~/code/udp/server.py
+|4,55,257,32,1704321005,"~/code/udp/server.py"
+'8  254  32  ~/code/udp/server.py
+|4,56,254,32,1704321005,"~/code/udp/server.py"
+'9  257  32  ~/code/udp/server.py
+|4,57,257,32,1704321005,"~/code/udp/server.py"
 
 # Jumplist (newest first):
--'  153  0  ~/code/udp/client.py
-|4,39,153,0,1704298438,"~/code/udp/client.py"
--'  1  0  ~/code/udp/client.py
-|4,39,1,0,1704298435,"~/code/udp/client.py"
--'  95  0  ~/code/udp/server_file.py
-|4,39,95,0,1704297987,"~/code/udp/server_file.py"
--'  95  0  ~/code/udp/server_file.py
-|4,39,95,0,1704297987,"~/code/udp/server_file.py"
--'  1  0  ~/code/udp/server_file.py
-|4,39,1,0,1704297984,"~/code/udp/server_file.py"
--'  1  0  ~/code/udp/server_file.py
-|4,39,1,0,1704297984,"~/code/udp/server_file.py"
--'  250  0  ~/code/udp/server.py
-|4,39,250,0,1704297754,"~/code/udp/server.py"
--'  250  0  ~/code/udp/server.py
-|4,39,250,0,1704297754,"~/code/udp/server.py"
--'  250  0  ~/code/udp/server.py
-|4,39,250,0,1704297754,"~/code/udp/server.py"
--'  250  0  ~/code/udp/server.py
-|4,39,250,0,1704297754,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1704297725,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1704297725,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1704297725,"~/code/udp/server.py"
--'  1  0  ~/code/udp/server.py
-|4,39,1,0,1704297725,"~/code/udp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  153  0  ~/code/tcp/server.py
-|4,39,153,0,1704297378,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  1  0  ~/code/tcp/server.py
-|4,39,1,0,1704297353,"~/code/tcp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  140  42  ~/code/udp/server.py
-|4,39,140,42,1704241253,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241225,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  20  18  ~/code/udp/server.py
-|4,39,20,18,1704241178,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241170,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  21  0  ~/code/udp/server.py
-|4,39,21,0,1704241152,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241145,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241123,"~/code/udp/server.py"
--'  20  19  ~/code/udp/server.py
-|4,39,20,19,1704241123,"~/code/udp/server.py"
+-'  55  0  ~/code/udp/server.py
+|4,39,55,0,1704322779,"~/code/udp/server.py"
+-'  49  0  ~/code/udp/server.py
+|4,39,49,0,1704321929,"~/code/udp/server.py"
+-'  49  0  ~/code/udp/server.py
+|4,39,49,0,1704321773,"~/code/udp/server.py"
+-'  242  43  ~/code/udp/server.py
+|4,39,242,43,1704321343,"~/code/udp/server.py"
+-'  242  43  ~/code/udp/server.py
+|4,39,242,43,1704321343,"~/code/udp/server.py"
+-'  242  43  ~/code/udp/server.py
+|4,39,242,43,1704321176,"~/code/udp/server.py"
+-'  257  32  ~/code/udp/server.py
+|4,39,257,32,1704321006,"~/code/udp/server.py"
+-'  257  32  ~/code/udp/server.py
+|4,39,257,32,1704321006,"~/code/udp/server.py"
+-'  257  32  ~/code/udp/server.py
+|4,39,257,32,1704321006,"~/code/udp/server.py"
+-'  254  32  ~/code/udp/server.py
+|4,39,254,32,1704321005,"~/code/udp/server.py"
+-'  254  32  ~/code/udp/server.py
+|4,39,254,32,1704321005,"~/code/udp/server.py"
+-'  254  32  ~/code/udp/server.py
+|4,39,254,32,1704321005,"~/code/udp/server.py"
+-'  190  18  ~/code/udp/server.py
+|4,39,190,18,1704320831,"~/code/udp/server.py"
+-'  189  18  ~/code/udp/server.py
+|4,39,189,18,1704320831,"~/code/udp/server.py"
+-'  190  18  ~/code/udp/server.py
+|4,39,190,18,1704320831,"~/code/udp/server.py"
+-'  189  18  ~/code/udp/server.py
+|4,39,189,18,1704320831,"~/code/udp/server.py"
+-'  190  18  ~/code/udp/server.py
+|4,39,190,18,1704320831,"~/code/udp/server.py"
+-'  189  18  ~/code/udp/server.py
+|4,39,189,18,1704320831,"~/code/udp/server.py"
+-'  189  18  ~/code/udp/server.py
+|4,39,189,18,1704320779,"~/code/udp/server.py"
+-'  38  0  ~/code/udp/server.py
+|4,39,38,0,1704320731,"~/code/udp/server.py"
+-'  37  0  ~/code/udp/server.py
+|4,39,37,0,1704320731,"~/code/udp/server.py"
+-'  38  0  ~/code/udp/server.py
+|4,39,38,0,1704320731,"~/code/udp/server.py"
+-'  37  0  ~/code/udp/server.py
+|4,39,37,0,1704320731,"~/code/udp/server.py"
+-'  38  0  ~/code/udp/server.py
+|4,39,38,0,1704320731,"~/code/udp/server.py"
+-'  37  0  ~/code/udp/server.py
+|4,39,37,0,1704320731,"~/code/udp/server.py"
+-'  37  0  ~/code/udp/server.py
+|4,39,37,0,1704320731,"~/code/udp/server.py"
+-'  37  0  ~/code/udp/server.py
+|4,39,37,0,1704320707,"~/code/udp/server.py"
+-'  207  18  ~/code/udp/server.py
+|4,39,207,18,1704320644,"~/code/udp/server.py"
+-'  206  18  ~/code/udp/server.py
+|4,39,206,18,1704320644,"~/code/udp/server.py"
+-'  205  18  ~/code/udp/server.py
+|4,39,205,18,1704320644,"~/code/udp/server.py"
+-'  204  18  ~/code/udp/server.py
+|4,39,204,18,1704320644,"~/code/udp/server.py"
+-'  207  18  ~/code/udp/server.py
+|4,39,207,18,1704320644,"~/code/udp/server.py"
+-'  206  18  ~/code/udp/server.py
+|4,39,206,18,1704320644,"~/code/udp/server.py"
+-'  205  18  ~/code/udp/server.py
+|4,39,205,18,1704320644,"~/code/udp/server.py"
+-'  204  18  ~/code/udp/server.py
+|4,39,204,18,1704320644,"~/code/udp/server.py"
+-'  207  18  ~/code/udp/server.py
+|4,39,207,18,1704320644,"~/code/udp/server.py"
+-'  206  18  ~/code/udp/server.py
+|4,39,206,18,1704320644,"~/code/udp/server.py"
+-'  205  18  ~/code/udp/server.py
+|4,39,205,18,1704320644,"~/code/udp/server.py"
+-'  204  18  ~/code/udp/server.py
+|4,39,204,18,1704320644,"~/code/udp/server.py"
+-'  205  18  ~/code/udp/server.py
+|4,39,205,18,1704320644,"~/code/udp/server.py"
+-'  204  18  ~/code/udp/server.py
+|4,39,204,18,1704320644,"~/code/udp/server.py"
+-'  212  18  ~/code/udp/server.py
+|4,39,212,18,1704320631,"~/code/udp/server.py"
+-'  211  18  ~/code/udp/server.py
+|4,39,211,18,1704320631,"~/code/udp/server.py"
+-'  210  18  ~/code/udp/server.py
+|4,39,210,18,1704320631,"~/code/udp/server.py"
+-'  209  18  ~/code/udp/server.py
+|4,39,209,18,1704320631,"~/code/udp/server.py"
+-'  212  18  ~/code/udp/server.py
+|4,39,212,18,1704320631,"~/code/udp/server.py"
+-'  211  18  ~/code/udp/server.py
+|4,39,211,18,1704320631,"~/code/udp/server.py"
+-'  210  18  ~/code/udp/server.py
+|4,39,210,18,1704320631,"~/code/udp/server.py"
+-'  209  18  ~/code/udp/server.py
+|4,39,209,18,1704320631,"~/code/udp/server.py"
+-'  212  18  ~/code/udp/server.py
+|4,39,212,18,1704320631,"~/code/udp/server.py"
+-'  211  18  ~/code/udp/server.py
+|4,39,211,18,1704320631,"~/code/udp/server.py"
+-'  210  18  ~/code/udp/server.py
+|4,39,210,18,1704320631,"~/code/udp/server.py"
+-'  209  18  ~/code/udp/server.py
+|4,39,209,18,1704320631,"~/code/udp/server.py"
+-'  210  18  ~/code/udp/server.py
+|4,39,210,18,1704320631,"~/code/udp/server.py"
+-'  209  18  ~/code/udp/server.py
+|4,39,209,18,1704320631,"~/code/udp/server.py"
+-'  203  20  ~/code/udp/server.py
+|4,39,203,20,1704320618,"~/code/udp/server.py"
+-'  208  20  ~/code/udp/server.py
+|4,39,208,20,1704320618,"~/code/udp/server.py"
+-'  202  20  ~/code/udp/server.py
+|4,39,202,20,1704320618,"~/code/udp/server.py"
+-'  203  20  ~/code/udp/server.py
+|4,39,203,20,1704320618,"~/code/udp/server.py"
+-'  208  20  ~/code/udp/server.py
+|4,39,208,20,1704320618,"~/code/udp/server.py"
+-'  202  20  ~/code/udp/server.py
+|4,39,202,20,1704320618,"~/code/udp/server.py"
+-'  205  20  ~/code/udp/server.py
+|4,39,205,20,1704320618,"~/code/udp/server.py"
+-'  210  20  ~/code/udp/server.py
+|4,39,210,20,1704320618,"~/code/udp/server.py"
+-'  204  20  ~/code/udp/server.py
+|4,39,204,20,1704320618,"~/code/udp/server.py"
+-'  209  20  ~/code/udp/server.py
+|4,39,209,20,1704320618,"~/code/udp/server.py"
+-'  203  20  ~/code/udp/server.py
+|4,39,203,20,1704320618,"~/code/udp/server.py"
+-'  208  20  ~/code/udp/server.py
+|4,39,208,20,1704320618,"~/code/udp/server.py"
+-'  202  20  ~/code/udp/server.py
+|4,39,202,20,1704320618,"~/code/udp/server.py"
+-'  207  20  ~/code/udp/server.py
+|4,39,207,20,1704320618,"~/code/udp/server.py"
+-'  203  20  ~/code/udp/server.py
+|4,39,203,20,1704320618,"~/code/udp/server.py"
+-'  208  20  ~/code/udp/server.py
+|4,39,208,20,1704320618,"~/code/udp/server.py"
+-'  202  20  ~/code/udp/server.py
+|4,39,202,20,1704320618,"~/code/udp/server.py"
+-'  207  20  ~/code/udp/server.py
+|4,39,207,20,1704320618,"~/code/udp/server.py"
+-'  207  20  ~/code/udp/server.py
+|4,39,207,20,1704320554,"~/code/udp/server.py"
+-'  213  0  ~/code/udp/server.py
+|4,39,213,0,1704320366,"~/code/udp/server.py"
+-'  218  0  ~/code/udp/server.py
+|4,39,218,0,1704320366,"~/code/udp/server.py"
+-'  217  0  ~/code/udp/server.py
+|4,39,217,0,1704320366,"~/code/udp/server.py"
+-'  216  0  ~/code/udp/server.py
+|4,39,216,0,1704320366,"~/code/udp/server.py"
+-'  215  0  ~/code/udp/server.py
+|4,39,215,0,1704320366,"~/code/udp/server.py"
+-'  213  0  ~/code/udp/server.py
+|4,39,213,0,1704320366,"~/code/udp/server.py"
+-'  218  0  ~/code/udp/server.py
+|4,39,218,0,1704320366,"~/code/udp/server.py"
+-'  217  0  ~/code/udp/server.py
+|4,39,217,0,1704320366,"~/code/udp/server.py"
+-'  216  0  ~/code/udp/server.py
+|4,39,216,0,1704320366,"~/code/udp/server.py"
+-'  215  0  ~/code/udp/server.py
+|4,39,215,0,1704320366,"~/code/udp/server.py"
+-'  213  0  ~/code/udp/server.py
+|4,39,213,0,1704320366,"~/code/udp/server.py"
+-'  218  0  ~/code/udp/server.py
+|4,39,218,0,1704320366,"~/code/udp/server.py"
+-'  217  0  ~/code/udp/server.py
+|4,39,217,0,1704320366,"~/code/udp/server.py"
+-'  211  0  ~/code/udp/server.py
+|4,39,211,0,1704320366,"~/code/udp/server.py"
+-'  216  0  ~/code/udp/server.py
+|4,39,216,0,1704320366,"~/code/udp/server.py"
+-'  215  0  ~/code/udp/server.py
+|4,39,215,0,1704320366,"~/code/udp/server.py"
+-'  211  0  ~/code/udp/server.py
+|4,39,211,0,1704320366,"~/code/udp/server.py"
+-'  216  0  ~/code/udp/server.py
+|4,39,216,0,1704320366,"~/code/udp/server.py"
+-'  210  0  ~/code/udp/server.py
+|4,39,210,0,1704320366,"~/code/udp/server.py"
+-'  215  0  ~/code/udp/server.py
+|4,39,215,0,1704320366,"~/code/udp/server.py"
+-'  215  0  ~/code/udp/server.py
+|4,39,215,0,1704320366,"~/code/udp/server.py"
+-'  204  0  ~/code/udp/server.py
+|4,39,204,0,1704320356,"~/code/udp/server.py"
+-'  209  0  ~/code/udp/server.py
+|4,39,209,0,1704320356,"~/code/udp/server.py"
+-'  203  0  ~/code/udp/server.py
+|4,39,203,0,1704320356,"~/code/udp/server.py"
+-'  208  0  ~/code/udp/server.py
+|4,39,208,0,1704320356,"~/code/udp/server.py"
+-'  208  0  ~/code/udp/server.py
+|4,39,208,0,1704320356,"~/code/udp/server.py"
 
 # History of marks within files (newest to oldest):
 
-> ~/code/udp/client.py
-	*	1704298437	0
-	"	153	0
-	^	153	0
-	.	152	0
-	+	33	9
-	+	9	33
-	+	152	0
+> ~/code/udp/server.py
+	*	1704322778	0
+	"	55	0
+	^	242	44
+	.	242	43
+	+	92	20
+	+	93	12
+	+	94	16
+	+	66	27
+	+	68	26
+	+	88	31
+	+	88	0
+	+	66	0
+	+	68	0
+	+	96	0
+	+	21	18
+	+	188	37
+	+	213	66
+	+	212	65
+	+	213	65
+	+	212	21
+	+	213	21
+	+	217	29
+	+	216	21
+	+	217	21
+	+	222	28
+	+	223	0
+	+	221	21
+	+	222	21
+	+	128	24
+	+	133	20
+	+	134	36
+	+	212	67
+	+	213	67
+	+	21	18
+	+	135	42
+	+	260	0
+	+	199	35
+	+	208	40
+	+	21	17
+	+	24	20
+	+	21	17
+	+	24	16
+	+	21	17
+	+	129	0
+	+	116	0
+	+	146	0
+	+	253	27
+	+	255	17
+	+	254	104
+	+	6	9
+	+	17	23
+	+	21	17
+	+	199	37
+	+	198	27
+	+	201	18
+	+	202	67
+	+	207	0
+	+	200	28
+	+	203	53
+	+	204	33
+	+	205	20
+	+	207	18
+	+	42	0
+	+	38	0
+	+	190	18
+	+	256	29
+	+	257	31
+	+	25	15
+	+	196	52
+	+	197	7
+	+	198	11
+	+	199	11
+	+	200	11
+	+	201	11
+	+	202	15
+	+	203	15
+	+	204	15
+	+	205	19
+	+	207	11
+	+	208	11
+	+	210	11
+	+	212	11
+	+	214	11
+	+	216	11
+	+	218	11
+	+	220	11
+	+	221	11
+	+	222	11
+	+	223	11
+	+	224	11
+	+	226	11
+	+	227	11
+	+	228	11
+	+	229	11
+	+	230	11
+	+	233	11
+	+	234	11
+	+	235	11
+	+	236	11
+	+	237	11
+	+	240	11
+	+	241	11
+	+	243	11
+	+	242	43
 
 > ~/code/udp/server_file.py
-	*	1704297987	0
-	"	95	0
-	^	95	0
-	.	94	0
-	+	83	12
+	*	1704320275	0
+	"	1	0
+	^	4	20
+	.	4	20
 	+	84	8
 	+	85	4
 	+	86	50
@@ -402,126 +500,41 @@
 	+	87	20
 	+	4	19
 	+	94	0
-
-> ~/code/udp/server.py
-	*	1704297753	0
-	"	250	0
-	^	250	0
-	.	249	0
-	+	65	42
-	+	77	0
-	+	79	47
-	+	80	16
-	+	81	85
-	+	170	68
-	+	176	71
-	+	149	18
-	+	133	18
-	+	66	18
-	+	136	113
-	+	133	54
-	+	20	16
-	+	20	18
-	+	72	38
-	+	65	31
-	+	75	38
-	+	136	102
-	+	136	20
-	+	135	0
-	+	133	0
-	+	101	0
-	+	102	0
-	+	66	0
-	+	68	0
-	+	222	0
-	+	221	43
-	+	20	18
-	+	219	0
-	+	216	24
-	+	207	7
-	+	210	8
-	+	211	7
-	+	215	7
-	+	216	7
-	+	207	65
-	+	220	0
-	+	138	34
-	+	139	20
-	+	105	16
-	+	140	32
-	+	137	0
-	+	132	14
-	+	220	0
-	+	111	30
-	+	115	21
-	+	112	23
-	+	116	12
-	+	69	27
-	+	77	22
-	+	77	27
-	+	89	0
-	+	77	0
-	+	69	0
-	+	115	0
-	+	83	42
-	+	82	35
-	+	84	52
-	+	87	34
-	+	88	24
-	+	84	26
-	+	82	32
-	+	85	40
-	+	142	25
-	+	99	24
-	+	97	24
-	+	93	16
-	+	94	20
-	+	95	20
-	+	96	12
-	+	97	16
-	+	69	27
-	+	71	26
-	+	91	31
-	+	91	0
-	+	69	0
-	+	71	0
-	+	99	0
-	+	20	18
-	+	194	37
-	+	208	66
-	+	207	65
-	+	208	65
-	+	207	21
-	+	208	21
-	+	212	29
-	+	211	21
-	+	212	21
-	+	217	28
-	+	218	0
-	+	216	21
-	+	217	21
-	+	132	24
-	+	138	20
-	+	139	36
-	+	207	67
-	+	208	67
-	+	20	18
-	+	140	42
-	+	249	0
-
-> ~/code/tcp/server.py
-	*	1704297378	0
-	"	153	0
-	^	153	0
-	.	152	16
-	+	5	10
-	+	110	31
-	+	122	7
-	+	152	16
+	+	4	20
 
 > ~/code/udp/server
-	*	1704240375	0
+	*	1704318953	0
 	"	1	0
+
+> ~/code/tcp/server.py
+	*	1704317459	0
+	"	102	0
+	^	131	0
+	.	131	0
+	+	5	10
+	+	111	31
+	+	121	7
+	+	152	16
+	+	132	0
+	+	111	72
+	+	127	47
+	+	111	22
+	+	108	53
+	+	109	7
+	+	110	11
+	+	111	22
+	+	112	0
+	+	108	41
+	+	131	0
+
+> ~/code/udp/client.py
+	*	1704298437	0
+	"	153	0
+	^	153	0
+	.	152	0
+	+	33	9
+	+	9	33
+	+	152	0
 
 > ~/code/udp/file.py
 	*	1704231509	0

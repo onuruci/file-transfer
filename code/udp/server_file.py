@@ -1,7 +1,7 @@
 import time
 DIR_NAME = "../../objects/"
 header_length = 7
-timeout_limit = 0.04
+timeout_limit = 0.005
 
 class ServerFile:
     
