@@ -23,31 +23,28 @@ def get_md5(bytes_data):
 def send_data(s, data):
     s.sendto(str.encode(data), serverAddressPort)
 
-def send_response(s, data, n):
-    s.sendto(str.encode(data + "|" + str(n)), serverAddressPort)
+def send_response(s, data, n, file_index):
+    s.sendto(str.encode(data + "|" + str(n) + "|" + str(file_index)), serverAddressPort)
 
-def recv_file(packet_count, UDPClientSocket):
+def recv_file(UDPClientSocket):
     data = ""
     i = 0
-    data_arr = [""] * packet_count
     while True:
         packet_received = UDPClientSocket.recvfrom(bufferSize)[0]
 
         packet_decoded = packet_received.decode('utf-8')
 
-        [packet_no, packet_data] = packet_decoded.split('|')
+        [file_index, packet_no, packet_data] = packet_decoded.split('|')
 
         window_place = int(packet_no)
-
-        data_arr[window_place] = packet_data
-
-        send_response(UDPClientSocket, ACK, window_place)
-
-        i += 1
+        file_index = int(file_index)
 
 
-        if(i >= packet_count):
-            break
+        file_arr[file_index].add_data(packet_data, window_place)
+
+        send_response(UDPClientSocket, ACK, window_place, file_index)
+
+
 
     for j in range(packet_count):
         data += data_arr[j]
@@ -111,6 +108,8 @@ def recv_all_metadata(UDPClientSocket):
         checksum = metadata_parsed[2]
         packet_count = int(metadata_parsed[3])
 
+        print(f"Contructing file {filename}, {filesize}, {packet_count}, {checksum}")
+
         file_arr += [File(filename, packet_count, filesize, checksum)]
 
     return
@@ -135,17 +134,14 @@ def run_client():
 
     recv_all_metadata(UDPClientSocket)
 
-    for i in range(20):
-        # recv metadata
-        print(f"Running file {i}")
-        curr_file = file_arr[i]
+    for i in range(len(file_arr)):
+        file_arr[i].print()
 
-        checksum = curr_file.checksum
-        packet_count = curr_file.packet_count
+    # recv metadata
 
-        recv_file(packet_count, UDPClientSocket)
 
-        print(checksum)
+    recv_file(UDPClientSocket)
+
 
 
 
