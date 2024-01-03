@@ -3,6 +3,7 @@ import os
 import math
 import time
 import threading
+from server_file import ServerFile
  
 
 localIP     = ""
@@ -14,11 +15,14 @@ bufferSize  = 1024
 DIR_NAME = "../../objects/"
 
  
-header_length = 8
-packet_data_length = 1016
-default_window = 10
+header_length = 7
+packet_data_length = 1014
+default_window = 400
 window_start = 0
 window_end = 100
+timeout_limit = 0.15
+
+file_arr = []
 
 array_lock = threading.Lock()
 update_sem = threading.Semaphore(1)
@@ -59,102 +63,62 @@ def send_data(s, data, address):
 # listen for acks
 
 def listen_client(socket_client):
-    global window_start
-    global window_end
-    global recv_arr
-    arr_len = len(recv_arr)
-
     update_sem.release()
     while True:
-        """
-        with array_lock:
-            if(window_start == window_end or window_start >= arr_len):
-                return
+        try:
+            receive = socket_client.recvfrom(1024)
+
+            msg = receive[0].decode('utf-8')
+            [msg_type, seq, file_index] = msg.split("|")
+
+            seq = int(seq)
+            file_index = int(file_index)
+
+
+            with array_lock:
+                file_arr[file_index].receive(seq)
+                
+                update_sem.release()
+                all_completed = True
+                for i in range(len(file_arr)):
+                    if(not file_arr[i].is_completed()):
+                        all_completed = False
+                        break
+                if(all_completed):
+                    break
+
+        except socket.timeout:
+            all_completed = True
+            for i in range(len(file_arr)):
+                if(not file_arr[i].is_completed()):
+                    all_completed = False
+                    break
+            if(all_completed):
                 break
-        """
-        
-        receive = socket_client.recvfrom(1024)
-
-        msg = receive[0].decode('utf-8')
-        [msg_type, seq] = msg.split("|")
-
-        seq = int(seq)
-
-        with array_lock:
-            recv_arr[seq] = -1
             update_sem.release()
-            if(recv_arr.count(-1)== arr_len):
-                break
-    
     return
-
-# check i and j
-# if equal greater than packet_count break
-# recv
-# update arr
-
-# send a packet
-
-def send_packet(socket_client, address, n):
-    global packet_data_length
-    global file_data
-
-    file_start = n * packet_data_length
-    packet_size = min(packet_data_length, len(file_data) - file_start)
-    packet_data = file_data[file_start: file_start+packet_size]
-    file_header = str(n) + "|"
-    file_header = (8-len(file_header)) * "0" + file_header
-    data_to_send = str(file_header+packet_data).encode('utf-8')
-
-    socket_client.sendto(data_to_send, address)
 
 
 
 # send packets to client
 
-def send_client(socket_client, address):
+def send_client(file_index):
     # while arr[window_start] == -1 , window_start++, window_end++
     # if window_start == window_end break
     # for window_start -> window_end
     # if 0 send directly write sending time
     # calculate time find difference if larger than expected send again update send time
-    global window_start
-    global window_end
-    global recv_arr
-
-    arr_len = len(recv_arr)
-
-
+    print(f"Sending {file_index}")
+    update_sem.release()
     while True:
         update_sem.acquire()
-        if(window_start == window_end or window_start >= arr_len):
+        if(file_arr[file_index].is_completed()):
             break
+
         with array_lock:
-            while(recv_arr[window_start] == -1):
-                # while marked as ACKed move the window
-                if(window_end < arr_len):
-                    window_end += 1
+            file_arr[file_index].loop_window(file_index)
 
-                window_start += 1
-                if(window_start >= arr_len):
-                    break
-
-            for i in range(window_start, window_end):
-                if(recv_arr[i] == -1):
-                    # if marked ACKed continue
-                    continue
-                elif(recv_arr[i] == 0):
-                    # if not sent at all send and write send time
-                    send_packet(socket_client, address, i)
-                    send_time = time.time()
-                    recv_arr[i] = send_time
-                else:
-                    # check send time if timedout send again
-                    send_time = recv_arr[i]
-                    curr_time = time.time()
-                    time_elapsed = curr_time - send_time
-
-            if(window_start == window_end or window_start >= arr_len):
+            if(file_arr[file_index].is_completed()):
                 break
 
     print(f"Sender End {window_start}")
@@ -165,43 +129,33 @@ def send_client(socket_client, address):
 # handle send file
 
 
-def send_file(filename, UDPServerSocket, address):
-    global file_data
-    global recv_arr
-    global window_start
-    global window_end
-
-    filesize = os.path.getsize(DIR_NAME + filename)
-    packet_count = int(math.ceil(filesize / float(packet_data_length)))
-
-    # read file data
-    file_data = read_file(filename)
+def send_file(start_index):
+    global file_arr
 
     # listener thread
     # writing thread
 
-    window_start = 0
-    window_end = min(400, packet_count)
-    recv_arr = [0] * packet_count
+    for i in range(10):
+        send_client(start_index + 2*i)
+        print(f"{file_arr[start_index + 2*i].name} sent successfully!")
 
-    listener_thread = threading.Thread(target=listen_client, args=(UDPServerSocket,))
-    sender_thread = threading.Thread(target=send_client, args=(UDPServerSocket, address))
-
-    listener_thread.start()
-    sender_thread.start()
-
-    listener_thread.join()
-    sender_thread.join()
-
-    print("Threads joined")
+    print("Send file ended")
 
 # get filename and return metadata
 
-def get_metadata(filename):
+def get_metadata(filename, file_index, server_socket, address):
+    global default_window
+    global packet_data_length
+    global file_arr
+
+
     filesize = os.path.getsize(DIR_NAME + filename)
     md5_data = read_file(filename+".md5").replace("\n", "")
     packet_count = int(math.ceil(filesize / float(packet_data_length)))
     metadata = (f"{filename}|{filesize}|{md5_data}|{packet_count}")
+
+    file_arr += [ServerFile(filename, filesize, "", packet_count, default_window, server_socket, address, packet_data_length)]
+
 
     return metadata
 
@@ -212,13 +166,14 @@ def send_metadata(server_socket, address):
 
     for i in range(10):
         filename = "small-"+str(i)+".obj"
-
-        metadata = get_metadata(filename)
+        
+        metadata = get_metadata(filename, 2*i, server_socket, address)
         metadata_all += metadata + "*"
+
 
         filename = "large-"+str(i)+".obj"
 
-        metadata = get_metadata(filename)
+        metadata = get_metadata(filename, 2*i +1, server_socket, address)
         metadata_all += metadata + "*"
 
     metadata_all = metadata_all[0:-1].encode('utf-8')
@@ -234,9 +189,9 @@ def run_server():
 
     UDPServerSocket.bind((localIP, localPort))
 
-
     while(True):
         bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
+        UDPServerSocket.settimeout(0.5)
 
         address = bytesAddressPair[1]
 
@@ -247,16 +202,21 @@ def run_server():
         send_metadata(UDPServerSocket, address)
 
         start_time = time.time()
-        for i in range(10):
-            filename = "small-"+str(i)+".obj"
 
-            send_file(filename, UDPServerSocket, address)
-            print(f"{filename} sent successfully!")
+        listener_thread = threading.Thread(target=listen_client, args=(UDPServerSocket,))
+        sender_thread1 = threading.Thread(target=send_file, args=(0,))
+        sender_thread2 = threading.Thread(target=send_file, args=(1,))
 
-            filename = "large-"+str(i)+".obj"
+        listener_thread.start()
+        sender_thread1.start()
+        sender_thread2.start()
 
-            send_file(filename, UDPServerSocket, address)
-            print(f"{filename} sent successfully!")
+
+        listener_thread.join()
+        sender_thread1.join()
+        sender_thread2.join()
+
+
         end_time = time.time()
         elapsed_time = end_time - start_time
         print(f"Execution time {elapsed_time}")
