@@ -3,7 +3,7 @@ import hashlib
 from file import File
 
 
-msgFromClient       = "Hello UDP Server"
+msgFromClient       = "connect"
 
 bytesToSend         = str.encode(msgFromClient)
 
@@ -27,32 +27,30 @@ def send_response(s, data, n, file_index):
     s.sendto(str.encode(data + "|" + str(n) + "|" + str(file_index)), serverAddressPort)
 
 def recv_file(UDPClientSocket):
-    data = ""
-    i = 0
     while True:
-        packet_received = UDPClientSocket.recvfrom(bufferSize)[0]
+        try:
+            packet_received = UDPClientSocket.recvfrom(bufferSize)[0]
 
-        packet_decoded = packet_received.decode('utf-8')
-
-        [file_index, packet_no, packet_data] = packet_decoded.split('|')
-
-        window_place = int(packet_no)
-        file_index = int(file_index)
+            packet_decoded = packet_received.decode('utf-8')
 
 
-        file_arr[file_index].add_data(packet_data, window_place)
+            [file_index, packet_no, packet_data] = packet_decoded.split('|')
 
-        send_response(UDPClientSocket, ACK, window_place, file_index)
+            window_place = int(packet_no)
+            file_index = int(file_index)
+
+
+            file_arr[file_index].add_data(packet_data, window_place)
+
+            send_response(UDPClientSocket, ACK, window_place, file_index)
+        except socket.timeout:
+            print("All files received terminating!")
+            break
 
 
 
-    for j in range(packet_count):
-        data += data_arr[j]
 
-    print("Calculating md5")
-    md5 = get_md5(data)
 
-    print(md5)
 
 
 ###################
@@ -129,8 +127,13 @@ def run_client():
 
 
     # Send to server using created UDP socket
+    while True:
+        UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+        packet_received = UDPClientSocket.recvfrom(bufferSize)[0].decode('utf-8')
+        if(packed_received == ACK):
+            send_data(UDPClientSocket, ACK)
+            break
 
-    UDPClientSocket.sendto(bytesToSend, serverAddressPort)
 
     recv_all_metadata(UDPClientSocket)
 

@@ -1,6 +1,7 @@
 import hashlib
 
 class File:
+    completed_count = 0
 
     def __init__(self, name, packet_count, size, checksum):
         self.name = name
@@ -24,7 +25,7 @@ class File:
             md5 = self.get_md5()
             print(md5)
             print(self.checksum)
-
+            File.completed_count += 1
             return True
         
         return False
