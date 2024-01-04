@@ -14,6 +14,11 @@ bufferSize          = 1024
 ACK = "ACK"
 NACK = "NACK"
 
+SYS = "SYS"
+SEND = "SEND"
+
+server_state = SYS
+
 file_arr = []
 file_index = 0
 
@@ -32,6 +37,10 @@ def recv_file(UDPClientSocket):
             packet_received = UDPClientSocket.recvfrom(bufferSize)[0]
 
             packet_decoded = packet_received.decode('utf-8')
+
+            if(packet_decoded.count('|') > 3):
+                send_data(UDPClientSocket, ACK)
+                continue
 
 
             [file_index, packet_no, packet_data] = packet_decoded.split('|')
@@ -81,24 +90,44 @@ def recv_metadata(UDPClientSocket):
 
 def recv_all_metadata(UDPClientSocket):
     global file_arr
+    global server_state
     metadata_bytes = b""
     metadata_all = []
     while(True):
-        msgFromServer = UDPClientSocket.recvfrom(2048)
+        try:
+            msgFromServer = UDPClientSocket.recvfrom(2048)
 
-        metadata_bytes += msgFromServer[0]
+            metadata_bytes += msgFromServer[0]
 
-        metadata_str_temp = metadata_bytes.decode('utf-8')
+            metadata_str_temp = metadata_bytes.decode('utf-8')
 
-        if(metadata_str_temp.count('|') == 60):
-            print("Metadata fully received")
-            send_data(UDPClientSocket, ACK)
-            metadata_all = metadata_str_temp.split("*")
-            break
-        else:
-            print("Metadata not yet received")
-            send_data(UDPClientSocket, NACK)
+            if(metadata_str_temp.count('|') == 60):
+                server_state = SEND
+                print("Metadata fully received")
+                send_data(UDPClientSocket, ACK)
+                metadata_all = metadata_str_temp.split("*")
+                break
+        except socket.timeout:
+            if(server_state == SYS):
+                send_data(UDPClientSocket, ACK)
 
+
+    for i in range(len(metadata_all)):
+        metadata_parsed = metadata_all[i].split("|")
+        filename = metadata_parsed[0]
+        filesize = metadata_parsed[1]
+        checksum = metadata_parsed[2]
+        packet_count = int(metadata_parsed[3])
+
+        print(f"Contructing file {filename}, {filesize}, {packet_count}, {checksum}")
+
+        file_arr += [File(filename, packet_count, filesize, checksum)]
+
+    return
+##################
+
+def construct_files(metadata_all):
+    global file_arr
     for i in range(len(metadata_all)):
         metadata_parsed = metadata_all[i].split("|")
         filename = metadata_parsed[0]
@@ -118,6 +147,9 @@ def recv_all_metadata(UDPClientSocket):
 
 
 def run_client():
+    global file_arr
+    global server_state
+    metadata_all = []
 
 
     # Create a UDP socket at client side
@@ -128,14 +160,22 @@ def run_client():
 
     # Send to server using created UDP socket
     while True:
-        UDPClientSocket.sendto(bytesToSend, serverAddressPort)
-        packet_received = UDPClientSocket.recvfrom(bufferSize)[0].decode('utf-8')
-        if(packed_received == ACK):
-            send_data(UDPClientSocket, ACK)
-            break
+        try:
+            UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+            metadata_str_temp = UDPClientSocket.recvfrom(2048)[0].decode('utf-8')
+            if(metadata_str_temp.count('|') == 60):
+                server_state = SEND
+                print("Metadata fully received")
+                send_data(UDPClientSocket, ACK)
+                metadata_all = metadata_str_temp.split("*")
+                break
+
+        except socket.timeout:
+            print("No connection established yet looking for server")
 
 
-    recv_all_metadata(UDPClientSocket)
+    construct_files(metadata_all)
+    #recv_all_metadata(UDPClientSocket)
 
     for i in range(len(file_arr)):
         file_arr[i].print()
