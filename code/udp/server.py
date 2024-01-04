@@ -19,9 +19,7 @@ RESULT_DIR = "./results/"
 header_length = 7
 packet_data_length = 1014
 default_window = 100
-window_start = 0
-window_end = 100
-timeout_limit = 5
+timeout_limit = 0.05
 result_file = ""
 
 file_arr = []
@@ -158,6 +156,7 @@ def get_metadata(filename, file_index, server_socket, address):
     global default_window
     global packet_data_length
     global file_arr
+    global timeout_limit
 
 
     filesize = os.path.getsize(DIR_NAME + filename)
@@ -165,7 +164,7 @@ def get_metadata(filename, file_index, server_socket, address):
     packet_count = int(math.ceil(filesize / float(packet_data_length)))
     metadata = (f"{filename}|{filesize}|{md5_data}|{packet_count}")
     
-    file_arr += [ServerFile(filename, filesize, "", packet_count, default_window, server_socket, address, packet_data_length)]
+    file_arr += [ServerFile(filename, filesize, "", packet_count, default_window, server_socket, address, packet_data_length, timeout_limit)]
 
 
     return metadata
@@ -215,6 +214,7 @@ def get_all_metadata(server_socket, address):
 def run_server():
     global file_arr
     global client_state
+    global timeout_limit
 
     UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
@@ -262,7 +262,7 @@ def run_server():
                         metadata_all = get_all_metadata(UDPServerSocket, address)
                         UDPServerSocket.sendto(metadata_all, address)
 
-            UDPServerSocket.settimeout(0.05)
+            UDPServerSocket.settimeout(timeout_limit)
 
             clientIP  = ("Client connected with IP Address:{}".format(address))
 
@@ -309,6 +309,7 @@ if __name__ == "__main__":
         print("Missing arguement should run `python3 server.py <result file> <timeout_limit> <window_size>`")
         sys.exit()
     result_file = sys.argv[1]
+    timeout_limit = float(sys.argv[2])
     window_size = int(sys.argv[3])
     run_server()
 

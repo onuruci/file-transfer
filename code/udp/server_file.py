@@ -1,11 +1,10 @@
 import time
 DIR_NAME = "../../objects/"
 header_length = 7
-timeout_limit = 0.005
 
 class ServerFile:
     
-    def __init__(self, name, size, file_data, packet_count, default_window, socket_server, client_address, packet_data_length):
+    def __init__(self, name, size, file_data, packet_count, default_window, socket_server, client_address, packet_data_length, timeout_limit):
         self.name = name
         self.size = size
         self.file_data = file_data
@@ -17,6 +16,8 @@ class ServerFile:
         self.client_address = client_address
         self.packet_data_length = packet_data_length
         self.recv_count = 0
+        self.timeout_limit = timeout_limit
+
 
         self.read_file()
 
@@ -83,7 +84,7 @@ class ServerFile:
                 send_time = self.recv_arr[i]
                 curr_time = time.time()
                 time_elapsed = curr_time - send_time
-                if(time_elapsed >= timeout_limit):
+                if(time_elapsed >= self.timeout_limit):
                     self.send_packet(i, file_index)
                     self.recv_arr[i] = curr_time
 

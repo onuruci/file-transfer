@@ -65,19 +65,15 @@ def send_all_file(conn, filename):
         metadata = f"{filename}|{file_size}|{md5_data}"
         conn.sendall(metadata.encode('utf-8'))
 
-        print("\n\n")
-        print(metadata)
 
         print(f"Metadata sent for file {filename}")
 
 
         if(message_status(conn)):
-            print("ACK received")
             break;
 
     # send file
     while True:
-        print("Sending file data")
         file_data = read_file_bytes(filename)
         file_size = int(file_size)
 
@@ -88,9 +84,10 @@ def send_all_file(conn, filename):
 
         conn.sendall(file_data)
 
+        print(f"File sent {filename}")
+
 
         if(message_status(conn)):
-            print("ACK received")
             break;
 
 
@@ -104,30 +101,35 @@ def run_server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((HOST, PORT))
     s.listen()
+    s.settimeout(5)
 
     with open(RESULT_DIR + result_file, 'w') as file:
         while True:
-            conn, addr = s.accept()
-            with conn:
-                print(f"\nConnected by {addr}\n")
+            try:
+                conn, addr = s.accept()
+                with conn:
+                    print(f"\nConnected by {addr}\n")
 
-                start_time = time.time()
-                # main loop for sending files
-                for i in range(10):
+                    start_time = time.time()
+                    # main loop for sending files
+                    for i in range(10):
 
-                    filename = "small-"+str(i)+".obj"
-                    send_all_file(conn, filename)
-                    filename = "large-"+str(i)+".obj"
-                    send_all_file(conn, filename)
+                        filename = "small-"+str(i)+".obj"
+                        send_all_file(conn, filename)
+                        filename = "large-"+str(i)+".obj"
+                        send_all_file(conn, filename)
 
-                end_time = time.time()
-                elapsed_time = end_time - start_time
+                    end_time = time.time()
+                    elapsed_time = end_time - start_time
 
-                print(f"Elapsed time: {elapsed_time} seconds")
-                file.write(str(elapsed_time)+"\n")
+                    print(f"Elapsed time: {elapsed_time} seconds")
+                    file.write(str(elapsed_time)+"\n")
 
 
-            conn.close()
+                conn.close()
+            except socket.timeout:
+                print("No available connections terminating!")
+                return
 
 
 
