@@ -26,6 +26,13 @@ result_file = ""
 
 file_arr = []
 
+
+SYS = "SYS"
+LISTEN = "LISTEN"
+
+client_state = SYS
+
+
 update_sem1 = threading.Semaphore(1)
 update_sem2 = threading.Semaphore(1)
 update_sem3 = threading.Semaphore(1)
@@ -93,14 +100,15 @@ def listen_client(socket_client):
 
         except socket.timeout:
             all_completed = True
-            for i in range(len(file_arr)):
-                if(not file_arr[i].is_completed()):
+            for j in range(len(file_arr)):
+                if(not file_arr[j].is_completed()):
                     all_completed = False
                     break
             if(all_completed):
                 break
             for i in range(len(update_sem_arr)):
                 update_sem_arr[i].release()
+    print("Resturning from listening")
     return
 
 
@@ -156,7 +164,7 @@ def get_metadata(filename, file_index, server_socket, address):
     md5_data = read_file(filename+".md5").replace("\n", "")
     packet_count = int(math.ceil(filesize / float(packet_data_length)))
     metadata = (f"{filename}|{filesize}|{md5_data}|{packet_count}")
-
+    
     file_arr += [ServerFile(filename, filesize, "", packet_count, default_window, server_socket, address, packet_data_length)]
 
 
@@ -183,11 +191,30 @@ def send_metadata(server_socket, address):
 
     send_data(server_socket, metadata_all, address)
 
+def get_all_metadata(server_socket, address):
+    metadata_all = ""
+
+    for i in range(10):
+        filename = "small-"+str(i)+".obj"
+
+        metadata = get_metadata(filename, 2*i, server_socket, address)
+        metadata_all += metadata + "*"
+
+
+        filename = "large-"+str(i)+".obj"
+
+        metadata = get_metadata(filename, 2*i +1, server_socket, address)
+        metadata_all += metadata + "*"
+
+    metadata_all = metadata_all[0:-1].encode('utf-8')
+    return metadata_all
+
 
 # run server
 
 def run_server():
     global file_arr
+    global client_state
 
     UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
@@ -195,25 +222,53 @@ def run_server():
 
     with open(RESULT_DIR + result_file, "w") as file:
         while(True):
-            print("Sending again")
+            print("Sending")
             UDPServerSocket.settimeout(10)
-            bytesAddressPair = []
+            address = ""
+            file_arr = []
+            client_state = SYS
+            # Establish a connection with client
+            # To ensure that both sides know that each other is working
+            # Three way handshake is implemented
+
+            # Client sends conenction request
+            # Server responds with the metadata
+            # Which carries needed information and accepted as an ACk on client
+            # Wait for an ACK and start sending files
             while True:
-                bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-                msg = bytesAddressPair[0].decode('utf-8')
-                if(msg == "connect"):
-                    break
+                # Connect message
+                try:
+                    bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
+                    msg = bytesAddressPair[0].decode('utf-8')
+                    if(msg == "connect"):
+                        # Connected getting client address
+                        print("Connected")
+                        UDPServerSocket.settimeout(0.05)
+                        file_arr = []
+                        address = bytesAddressPair[1]
+                        metadata_all = get_all_metadata(UDPServerSocket, address)
+                        UDPServerSocket.sendto(metadata_all, address)
+                        client_state = LISTEN
+                    if(msg == "ACK"):
+                        print("Metadata recevied")
+                        break
+                except socket.timeout:
+                    if(client_state == SYS):
+                        print("No connection established terminating")
+                        return
+                    elif(client_state == LISTEN):
+                        print("Sending metadata again")
+                        file_arr= []
+                        metadata_all = get_all_metadata(UDPServerSocket, address)
+                        UDPServerSocket.sendto(metadata_all, address)
 
-            file_arr=[]
-            UDPServerSocket.settimeout(0.00005)
-
-            address = bytesAddressPair[1]
+            UDPServerSocket.settimeout(0.05)
 
             clientIP  = ("Client connected with IP Address:{}".format(address))
 
             print(clientIP)
 
-            send_metadata(UDPServerSocket, address)
+            #send_metadata(UDPServerSocket, address)
 
             start_time = time.time()
 
