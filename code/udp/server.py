@@ -239,6 +239,9 @@ def run_server():
             # Server responds with the metadata
             # Which carries needed information and accepted as an ACk on client
             # Wait for an ACK and start sending files
+            
+            start_time = time.time()
+
             while True:
                 # Connect message
                 try:
@@ -274,7 +277,6 @@ def run_server():
 
             #send_metadata(UDPServerSocket, address)
 
-            start_time = time.time()
 
             listener_thread = threading.Thread(target=listen_client, args=(UDPServerSocket,))
             sender_thread1 = threading.Thread(target=send_file, args=(0,))
