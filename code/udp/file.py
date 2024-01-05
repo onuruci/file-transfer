@@ -1,4 +1,7 @@
 import hashlib
+import sys
+
+DIR_NAME = "../../objects/"
 
 class File:
     completed_count = 0
@@ -23,8 +26,15 @@ class File:
                 self.data += self.data_arr[i]
 
             md5 = self.get_md5()
-            print(md5)
-            print(self.checksum)
+            print(self.name)
+            print(f"md5:    {md5}")
+            print(f"check:  {self.checksum}")
+            if(md5 == self.checksum):
+                print("Success")
+                with open(DIR_NAME + self.name, "w") as file:
+                    file.write(self.data)
+            else:
+                sys.exit()
             File.completed_count += 1
             return True
         

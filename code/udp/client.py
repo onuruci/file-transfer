@@ -119,7 +119,6 @@ def recv_all_metadata(UDPClientSocket):
         checksum = metadata_parsed[2]
         packet_count = int(metadata_parsed[3])
 
-        print(f"Contructing file {filename}, {filesize}, {packet_count}, {checksum}")
 
         file_arr += [File(filename, packet_count, filesize, checksum)]
 
@@ -135,10 +134,9 @@ def construct_files(metadata_all):
         checksum = metadata_parsed[2]
         packet_count = int(metadata_parsed[3])
 
-        print(f"Contructing file {filename}, {filesize}, {packet_count}, {checksum}")
-
         file_arr += [File(filename, packet_count, filesize, checksum)]
-
+    
+    print(f"Constructed {len(file_arr)} files")
     return
 
 
@@ -155,7 +153,7 @@ def run_client():
     # Create a UDP socket at client side
 
     UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-    UDPClientSocket.settimeout(3)
+    UDPClientSocket.settimeout(0.5)
 
 
     # Send to server using created UDP socket
@@ -173,12 +171,12 @@ def run_client():
         except socket.timeout:
             print("No connection established yet looking for server")
 
+    UDPClientSocket.settimeout(3)
+
+
 
     construct_files(metadata_all)
     #recv_all_metadata(UDPClientSocket)
-
-    for i in range(len(file_arr)):
-        file_arr[i].print()
 
     # recv metadata
 
@@ -190,7 +188,10 @@ def run_client():
 
 
 if __name__ == "__main__":
-    run_client()
+    for i in range(30):
+        file_arr = []
+        server_state = SYS
+        run_client()
 
 
 
