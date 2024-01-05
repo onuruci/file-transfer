@@ -171,7 +171,7 @@ def run_client():
         except socket.timeout:
             print("No connection established yet looking for server")
 
-    UDPClientSocket.settimeout(3)
+    UDPClientSocket.settimeout(5)
 
 
 
