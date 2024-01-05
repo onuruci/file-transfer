@@ -78,6 +78,10 @@ def listen_client(socket_client):
             receive = socket_client.recvfrom(1024)
 
             msg = receive[0].decode('utf-8')
+
+            if(msg.count('|') != 2):
+                continue
+
             [msg_type, seq, file_index] = msg.split("|")
 
             seq = int(seq)
