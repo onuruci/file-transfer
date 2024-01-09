@@ -20,7 +20,7 @@ It uses Selective Repeat algorithm for ensuring the reliability. Accepts individ
 
 For client to start listening and server to start sending files both must ensure that connection happened successfully. For this purpose it first makes a three way handshake. Then the server gets to the sending state and the client gets to the listening state. With this approach both get aware of each other’s state.
 
-After the handshake it uses a multithreaded approach for listening to the ACK’s and sending files. One thread is only assigned for listening ACK’s and there are fmy threads assigned for sending packets. Used mutexes and locks, mutexes are assigned when looping window in sending threads and released on new ACK receives and listening timeouts.
+After the handshake it uses a multithreaded approach for listening to the ACK’s and sending files. One thread is only assigned for listening ACK’s and there are four threads assigned for sending packets. Used mutexes and locks, mutexes are assigned when looping window in sending threads and released on new ACK receives and listening timeouts.
 
 There is a ServerFile object which parses files into packets and assign headers to it, it tracks ACK’s and window place for individual files. When a file is completely received it writes the file into objects/ folder.
 
