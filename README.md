@@ -5,12 +5,12 @@
 To run the project on an isolated environment check the instructions at the end of the page.
 
 Server is run with 
-`python3 server.py <result file> <timeout_limit> <window_size>`
+```python3 server.py <result file> <timeout_limit> <window_size>```
 
 For test cases usually selected 0.005 time limit and 300 as window size.
 
 Client is run with
-`python3 client.py `
+```python3 client.py```
 
 It uses Selective Repeat algorithm for ensuring the reliability. Accepts individual ACK’s for sent packets and slides the window as lowest sequenced numbers in window receives ACK’s.
 
@@ -30,10 +30,10 @@ During the three way handshake server sends the metadata about files. So that cl
 TCP version
 
 Server is run with 
-`python3 server.py <result file>`
+```python3 server.py <result file>```
 
 Client is run with
-`python3 client.py `
+```python3 client.py```
 
 # Test Results and Conclusion
 
